@@ -61,29 +61,29 @@ const AuthPage: React.FC = () => {
     };
 
     const RoleSelector = () => (
-        <div className="mb-6">
-            <label className="block text-text-secondary text-sm font-bold mb-3 text-center">اختر دورك للتسجيل</label>
-            <div className="flex gap-4">
+        <div className="mb-8">
+            <label className="block text-text-secondary text-base font-bold mb-4 text-center">اختر دورك للتسجيل</label>
+            <div className="flex gap-6">
                 <button
                     id="role-candidate"
                     type="button"
                     onClick={() => setRole('candidate')}
-                    className={`flex-1 text-center p-3 rounded-lg border-2 transition-all duration-200 ${role === 'candidate' ? 'bg-accent-gold border-accent-gold text-primary-dark font-bold' : 'bg-primary-dark border-primary-surface hover:border-accent-gold text-text-primary'}`}
+                    className={`flex-1 text-center p-4 rounded-xl border-2 transition-all duration-300 hover-lift ${role === 'candidate' ? 'btn-primary border-accent-gold text-primary-dark font-bold' : 'glass-effect border-primary-surface hover:border-accent-gold text-text-primary'}`}
                 >
                     <label htmlFor="role-candidate" className="cursor-pointer">
-                        <span className="block text-lg">باحث عن عمل</span>
-                        <span className="text-xs">(مرشح)</span>
+                        <span className="block text-xl font-bold">باحث عن عمل</span>
+                        <span className="text-sm opacity-80">(مرشح)</span>
                     </label>
                 </button>
                 <button
                     id="role-recruiter"
                     type="button"
                     onClick={() => setRole('recruiter')}
-                    className={`flex-1 text-center p-3 rounded-lg border-2 transition-all duration-200 ${role === 'recruiter' ? 'bg-accent-gold border-accent-gold text-primary-dark font-bold' : 'bg-primary-dark border-primary-surface hover:border-accent-gold text-text-primary'}`}
+                    className={`flex-1 text-center p-4 rounded-xl border-2 transition-all duration-300 hover-lift ${role === 'recruiter' ? 'btn-primary border-accent-gold text-primary-dark font-bold' : 'glass-effect border-primary-surface hover:border-accent-gold text-text-primary'}`}
                 >
                      <label htmlFor="role-recruiter" className="cursor-pointer">
-                        <span className="block text-lg">باحث عن موظف</span>
-                        <span className="text-xs">(شركة)</span>
+                        <span className="block text-xl font-bold">باحث عن موظف</span>
+                        <span className="text-sm opacity-80">(شركة)</span>
                     </label>
                 </button>
             </div>
@@ -91,24 +91,25 @@ const AuthPage: React.FC = () => {
     );
 
     return (
-        <div className="min-h-screen bg-primary-dark flex flex-col justify-center items-center p-4">
-             <div className="text-3xl font-bold text-text-primary mb-6">
-                <span className="text-accent-gold">مسار</span> Masar
+        <div className="min-h-screen bg-gradient-to-br from-primary-dark via-primary-surface to-primary-dark flex flex-col justify-center items-center p-4">
+             <div className="text-4xl font-bold mb-8 animate-fade-in">
+                <span className="gradient-text">مسار</span> 
+                <span className="text-text-primary ml-2">Masar</span>
             </div>
-            <div className="w-full max-w-md bg-primary-surface p-8 rounded-2xl shadow-lg">
-                <h2 className="text-2xl font-bold text-text-primary text-center mb-2">{isLogin ? 'تسجيل الدخول' : 'إنشاء حساب جديد'}</h2>
-                <p className="text-center text-text-secondary mb-8">
+            <div className="w-full max-w-lg glass-effect p-10 rounded-3xl shadow-2xl animate-slide-up">
+                <h2 className="text-3xl font-bold text-text-primary text-center mb-4">{isLogin ? 'تسجيل الدخول' : 'إنشاء حساب جديد'}</h2>
+                <p className="text-center text-text-secondary mb-10 text-lg">
                     {isLogin ? 'مرحباً بعودتك! ادخل بياناتك للمتابعة.' : 'انضم إلى سوق المواهب الأفضل في المنطقة.'}
                 </p>
 
-                {message && <div className="bg-green-900/50 text-green-300 p-3 rounded-lg mb-4 text-center">{message}</div>}
-                {error && <div className="bg-red-900/50 text-red-300 p-3 rounded-lg mb-4 text-center">{error}</div>}
+                {message && <div className="bg-green-900/30 border border-green-500/30 text-green-300 p-4 rounded-xl mb-6 text-center backdrop-blur-sm">{message}</div>}
+                {error && <div className="bg-red-900/30 border border-red-500/30 text-red-300 p-4 rounded-xl mb-6 text-center backdrop-blur-sm">{error}</div>}
 
                 {!isLogin && <RoleSelector />}
 
                 <form onSubmit={handleAuthAction}>
-                    <div className="mb-4">
-                        <label className="block text-text-secondary text-sm font-bold mb-2" htmlFor="email">
+                    <div className="mb-6">
+                        <label className="block text-text-secondary text-base font-bold mb-3" htmlFor="email">
                             البريد الإلكتروني
                         </label>
                         <input
@@ -118,11 +119,11 @@ const AuthPage: React.FC = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             className="input-style"
-                            placeholder="you@example.com"
+                            placeholder="📧 you@example.com"
                         />
                     </div>
-                    <div className="mb-6">
-                        <label className="block text-text-secondary text-sm font-bold mb-2" htmlFor="password">
+                    <div className="mb-8">
+                        <label className="block text-text-secondary text-base font-bold mb-3" htmlFor="password">
                             كلمة المرور
                         </label>
                         <input
@@ -133,14 +134,14 @@ const AuthPage: React.FC = () => {
                             required
                             minLength={6}
                             className="input-style"
-                            placeholder="••••••••••"
+                            placeholder="🔒 ••••••••••"
                         />
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-8">
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-accent-gold text-primary-dark font-bold py-3 px-4 rounded-lg hover:bg-yellow-500 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
+                            className="w-full btn-primary text-primary-dark font-bold py-4 px-6 rounded-xl text-lg disabled:opacity-50"
                         >
                             {loading ? 'جاري...' : (isLogin ? 'تسجيل الدخول' : 'إنشاء حساب')}
                         </button>
@@ -149,27 +150,27 @@ const AuthPage: React.FC = () => {
 
                 <div className="relative my-6">
                     <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-primary-dark"></div>
+                        <div className="w-full border-t border-primary-surface/50"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-primary-surface text-text-secondary">أو استمر عبر</span>
+                        <span className="px-4 glass-effect text-text-secondary rounded-lg">أو استمر عبر</span>
                     </div>
                 </div>
 
-                <div className="space-y-4">
-                    <button onClick={() => handleOAuthLogin('google')} disabled={loading} className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50">
+                <div className="space-y-6">
+                    <button onClick={() => handleOAuthLogin('google')} disabled={loading} className="w-full flex items-center justify-center gap-3 bg-white text-gray-700 font-semibold py-4 px-6 rounded-xl hover:bg-gray-200 transition-all duration-300 disabled:opacity-50 hover-lift">
                         <GoogleIcon />
                         <span>المتابعة باستخدام جوجل</span>
                     </button>
-                    <button disabled={true} className="w-full flex items-center justify-center gap-3 bg-[#0A66C2] text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:bg-gray-600 disabled:cursor-not-allowed">
+                    <button disabled={true} className="w-full flex items-center justify-center gap-3 bg-[#0A66C2] text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:bg-gray-600 disabled:cursor-not-allowed">
                         <LinkedInIcon />
                         <span>المتابعة باستخدام لينكد إن (قريباً)</span>
                     </button>
                 </div>
 
-                <p className="text-center text-text-secondary mt-8">
+                <p className="text-center text-text-secondary mt-10 text-lg">
                     {isLogin ? 'ليس لديك حساب؟' : 'هل لديك حساب بالفعل؟'}
-                    <button onClick={() => { setIsLogin(!isLogin); setError(''); setMessage(''); setRole(null); }} className="font-bold text-accent-gold hover:underline px-2">
+                    <button onClick={() => { setIsLogin(!isLogin); setError(''); setMessage(''); setRole(null); }} className="font-bold text-accent-gold hover:text-yellow-400 transition-colors px-2">
                         {isLogin ? 'أنشئ حساباً' : 'سجل الدخول'}
                     </button>
                 </p>

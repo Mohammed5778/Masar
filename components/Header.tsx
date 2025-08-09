@@ -39,29 +39,29 @@ const Header: React.FC<HeaderProps> = ({
   }
 
   return (
-    <header className="bg-primary-dark/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary-surface/50">
+    <header className="glass-effect sticky top-0 z-50 border-b border-primary-surface/30">
       <div className="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
         <div className="flex items-center gap-4">
             <button
                 disabled={!canNavigateToSettings}
                 onClick={onNavigateToSettings}
-                className={`flex items-center gap-2 rounded-full transition-all duration-300 ${canNavigateToSettings ? 'cursor-pointer hover:bg-primary-surface p-1' : 'cursor-default p-1'}`}
+                className={`flex items-center gap-3 rounded-2xl transition-all duration-300 ${canNavigateToSettings ? 'cursor-pointer hover:bg-primary-surface/50 p-2' : 'cursor-default p-2'}`}
             >
-                <img src={userImage} alt="Profile" className="w-9 h-9 rounded-full object-cover bg-primary-dark" />
-                <span className="hidden sm:block text-text-primary font-bold">{profile?.company_name || profile?.full_name}</span>
+                <img src={userImage} alt="Profile" className="w-10 h-10 rounded-full object-cover bg-primary-dark border-2 border-accent-gold/30" />
+                <span className="hidden sm:block text-text-primary font-bold text-lg">{profile?.company_name || profile?.full_name}</span>
             </button>
         </div>
 
         <div 
-            className="text-2xl font-bold text-text-primary cursor-pointer"
+            className="text-3xl font-bold cursor-pointer"
             onClick={handleLogoClick}
         >
-          <span className="text-accent-gold">مسار</span>
+          <span className="gradient-text">مسار</span>
         </div>
         
         <div className="flex items-center">
-            <button onClick={onLogout} className="text-text-secondary hover:text-accent-gold p-2 rounded-full transition-colors" title="تسجيل الخروج">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <button onClick={onLogout} className="text-text-secondary hover:text-accent-gold p-3 rounded-xl transition-all duration-300 hover:bg-primary-surface/30" title="تسجيل الخروج">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
             </button>
@@ -70,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({
       
       {/* Mobile-style Navigation for Recruiters */}
       {role === 'recruiter' && (
-        <div className="bg-primary-dark border-t border-primary-surface/50">
+        <div className="glass-effect border-t border-primary-surface/30">
           <div className="container mx-auto px-4 sm:px-6 flex justify-around">
             <NavButton label="التحكم" onClick={onNavigateToDashboard} isActive={currentView === 'dashboard'} />
             <NavButton label="السوق" onClick={onNavigateToMarketplace} isActive={currentView === 'marketplace'} />
@@ -84,8 +84,8 @@ const Header: React.FC<HeaderProps> = ({
 const NavButton: React.FC<{label: string; onClick: () => void; isActive: boolean}> = ({label, onClick, isActive}) => (
     <button 
       onClick={onClick}
-      className={`py-3 px-4 font-bold text-sm w-full transition-colors duration-200 border-b-2
-      ${isActive ? 'text-accent-gold border-accent-gold' : 'text-text-secondary border-transparent hover:text-text-primary'}`}
+      className={`py-4 px-6 font-bold text-base w-full transition-all duration-300 border-b-3 rounded-t-lg
+      ${isActive ? 'text-accent-gold border-accent-gold bg-primary-surface/30' : 'text-text-secondary border-transparent hover:text-text-primary hover:bg-primary-surface/20'}`}
     >
       {label}
     </button>

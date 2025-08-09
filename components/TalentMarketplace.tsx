@@ -97,22 +97,24 @@ const TalentMarketplace: React.FC<TalentMarketplaceProps> = ({ candidates, profi
       {userRole === 'candidate' && (
         <section id="job-market" className="py-16 bg-primary-dark">
             <div className="container mx-auto px-4 sm:px-6">
-                <h2 className="text-3xl font-bold text-center text-text-primary mb-4">سوق الوظائف</h2>
-                <p className="text-center text-text-secondary max-w-2xl mx-auto mb-12">
+                <div className="text-center mb-16 animate-fade-in">
+                  <h2 className="text-4xl lg:text-5xl font-bold text-text-primary mb-6">سوق <span className="gradient-text">الوظائف</span></h2>
+                  <p className="text-xl text-text-secondary max-w-3xl mx-auto">
                     ابحث عن فرصتك التالية. نعرض لك الوظائف المطابقة لك أولاً لسهولة الوصول.
-                </p>
+                  </p>
+                </div>
                 
                  <div className="flex justify-center mb-8">
-                  <div className="bg-primary-dark p-1.5 rounded-xl flex gap-2">
+                  <div className="glass-effect p-2 rounded-2xl flex gap-3 shadow-lg">
                     <button
                       onClick={() => setActiveJobTab('relevant')}
-                      className={`px-6 py-2 rounded-lg font-bold transition-all duration-300 ${activeJobTab === 'relevant' ? 'bg-accent-gold text-primary-dark' : 'text-text-primary hover:bg-primary-surface'}`}
+                      className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 text-lg ${activeJobTab === 'relevant' ? 'btn-primary text-primary-dark' : 'text-text-primary hover:bg-primary-surface/50'}`}
                     >
                       وظائف مطابقة لك
                     </button>
                     <button
                       onClick={() => setActiveJobTab('all')}
-                      className={`px-6 py-2 rounded-lg font-bold transition-all duration-300 ${activeJobTab === 'all' ? 'bg-accent-gold text-primary-dark' : 'text-text-primary hover:bg-primary-surface'}`}
+                      className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 text-lg ${activeJobTab === 'all' ? 'btn-primary text-primary-dark' : 'text-text-primary hover:bg-primary-surface/50'}`}
                     >
                       تصفح كل الوظائف
                     </button>
@@ -120,38 +122,47 @@ const TalentMarketplace: React.FC<TalentMarketplaceProps> = ({ candidates, profi
                 </div>
 
                 {jobsLoading ? (
-                    <div className="text-center py-16 text-text-secondary">جاري تحميل الوظائف...</div>
+                    <div className="text-center py-20">
+                      <div className="w-16 h-16 border-4 border-t-accent-gold border-primary-surface rounded-full animate-spin mx-auto mb-4"></div>
+                      <div className="text-text-secondary text-xl">جاري تحميل الوظائف...</div>
+                    </div>
                 ) : jobsError ? (
-                    <div className="text-center py-16 text-red-400 bg-red-900/30 rounded-xl p-6">
-                        <h3 className="text-2xl font-bold">حدث خطأ</h3>
-                        <p className="mt-2">{jobsError}</p>
+                    <div className="text-center py-20">
+                      <div className="glass-effect p-8 rounded-2xl max-w-md mx-auto">
+                        <h3 className="text-2xl font-bold text-red-400 mb-4">حدث خطأ</h3>
+                        <p className="text-text-secondary">{jobsError}</p>
+                      </div>
                     </div>
                 ) : (
                     <>
                         {activeJobTab === 'relevant' && (
                             matchingJobs.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                <div className="desktop-grid">
                                     {matchingJobs.map(job => (
                                         <JobCard key={job.id} job={job} />
                                     ))}
                                 </div>
                             ) : (
-                                <div className="text-center py-16 text-text-secondary bg-primary-surface/50 rounded-xl p-6">
-                                    <h3 className="text-2xl font-bold text-text-primary">لا توجد وظائف مطابقة لك حالياً</h3>
-                                    <p className="mt-2">اذهب إلى صفحة الإعدادات من القائمة العلوية لتشغيل البحث عن وظائف مطابقة لك.</p>
+                                <div className="text-center py-20">
+                                  <div className="glass-effect p-12 rounded-2xl max-w-2xl mx-auto">
+                                    <h3 className="text-3xl font-bold text-text-primary mb-4">لا توجد وظائف مطابقة لك حالياً</h3>
+                                    <p className="text-text-secondary text-lg">اذهب إلى صفحة الإعدادات من القائمة العلوية لتشغيل البحث عن وظائف مطابقة لك.</p>
+                                  </div>
                                 </div>
                             )
                         )}
                         {activeJobTab === 'all' && (
                              allJobs.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                <div className="desktop-grid">
                                     {allJobs.map(job => (
                                         <JobPostingCard key={job.id} job={job} onViewDetails={handleViewJobDetails} />
                                     ))}
                                 </div>
                             ) : (
-                                <div className="text-center py-16 text-text-secondary bg-primary-surface/50 rounded-xl p-6">
-                                    <h3 className="text-2xl font-bold text-text-primary">لا توجد وظائف متاحة حالياً في المنصة</h3>
+                                <div className="text-center py-20">
+                                  <div className="glass-effect p-12 rounded-2xl max-w-2xl mx-auto">
+                                    <h3 className="text-3xl font-bold text-text-primary mb-4">لا توجد وظائف متاحة حالياً في المنصة</h3>
+                                  </div>
                                 </div>
                             )
                         )}
@@ -163,28 +174,30 @@ const TalentMarketplace: React.FC<TalentMarketplaceProps> = ({ candidates, profi
 
       <section id="marketplace" className="py-16 bg-primary-dark">
           <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl font-bold text-center text-text-primary mb-4">سوق المواهب المعتمدة</h2>
-          <p className="text-center text-text-secondary max-w-2xl mx-auto mb-12">
-          {userRole === 'candidate'
-              ? 'تصفح أفضل المرشحين الذين تم تقييمهم واعتمادهم من خلال منصة مسار.'
-              : (<>وظّف <span className="text-accent-gold">أسرع</span>، ووظّف <span className="text-accent-gold">أذكى</span> مع جوازات السفر المهنية.</>)
-          }
-          </p>
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl lg:text-5xl font-bold text-text-primary mb-6">سوق <span className="gradient-text">المواهب</span> المعتمدة</h2>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            {userRole === 'candidate'
+                ? 'تصفح أفضل المرشحين الذين تم تقييمهم واعتمادهم من خلال منصة مسار.'
+                : (<>وظّف <span className="text-accent-gold">أسرع</span>، ووظّف <span className="text-accent-gold">أذكى</span> مع جوازات السفر المهنية.</>)
+            }
+            </p>
+          </div>
 
-          <div className="bg-primary-surface p-4 rounded-xl mb-12 flex flex-col md:flex-row gap-4 items-center shadow-lg">
+          <div className="glass-effect p-6 rounded-2xl mb-16 flex flex-col lg:flex-row gap-6 items-center shadow-lg">
               <div className="relative flex-grow w-full md:w-auto">
               <input
                   type="text"
-                  placeholder="ابحث بالاسم، المسمى الوظيفي، أو المهارة..."
+                  placeholder="🔍 ابحث بالاسم، المسمى الوظيفي، أو المهارة..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="input-style w-full"
+                  className="input-style w-full text-lg py-4"
               />
               </div>
               <select
               value={selectedSkill}
               onChange={e => setSelectedSkill(e.target.value as string)}
-              className="input-style w-full md:w-auto"
+              className="input-style w-full lg:w-auto text-lg py-4"
               >
               <option value="all">كل المهارات</option>
               {allSkills.map(skill => (
@@ -193,15 +206,17 @@ const TalentMarketplace: React.FC<TalentMarketplaceProps> = ({ candidates, profi
               </select>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="desktop-grid">
               {filteredCandidates.map(candidate => (
               <TalentCard key={candidate.id} candidate={candidate} onViewPassport={handleViewPassport} />
               ))}
           </div>
           {filteredCandidates.length === 0 && (
-              <div className="text-center py-16 text-text-secondary">
-              <h3 className="text-2xl font-bold text-text-primary">لا توجد نتائج مطابقة</h3>
-              <p className="mt-2">حاول توسيع نطاق البحث أو تغيير الفلاتر.</p>
+              <div className="text-center py-20">
+                <div className="glass-effect p-12 rounded-2xl max-w-2xl mx-auto">
+                  <h3 className="text-3xl font-bold text-text-primary mb-4">لا توجد نتائج مطابقة</h3>
+                  <p className="text-text-secondary text-lg">حاول توسيع نطاق البحث أو تغيير الفلاتر.</p>
+                </div>
               </div>
           )}
           </div>
